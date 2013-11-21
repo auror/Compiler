@@ -1,0 +1,67 @@
+1.N_START -> N_main N_otherFunctions.
+2.N_main -> +MAIN +COLON N_statement N_end.
+3.N_otherFunctions -> N_dataType +IDENTIFIER +LBRAC N_otherFunctions'.
+4.N_otherFunctions' -> N_parameterslist +RBRAC +COLON N_statement N_end
+5.N_otherFunctions'-> +RBRAC +COLON N_statement N_end.
+6.N_dataType -> char 
+7.N_dataType -> int
+8.N_dataType ->double 
+9.N_dataType ->string 
+10.N_dataType ->void.
+11.N_parameterslist -> +IDENTIFIER N_variable N_parameterslist'.
+12.N_parameterslist' -> +COMMA +IDENTIFIER N_variable
+13.N_parameterslist'->epsilon
+14.N_end -> endLoop
+15.N_end ->endProgram.
+16.N_declaration -> N_variable +SEM.
+17.N_variable -> +COLON N_dataType N_variableList.
+18.N_variableList -> +SQL +VALUE +SQR 
+19.N_variableList ->epsilon
+20.N_statement -> N_arithmetic N_statement1 
+21.N_statement -> N_relational N_statement1
+22.N_statement -> N_iterative N_statement1 
+23.N_statement ->  N_returnStatement N_statement1 
+24.N_statement -> N_end N_statement1 
+25.N_statement -> N_conditional N_statement1 
+26.N_statement -> +IDENTIFIER N_statement2.
+27.N_statement2 -> N_functionCall N_statement1 
+28. N_statement2 ->N_assignment N_statement1 
+29. N_statement2 ->N_declaration N_statement1.
+30.N_statement1 -> +SEM N_statement' N_statement1.
+31.N_statement' -> N_statement 
+32.N_statement' -> epsilon
+33.N_returnStatement -> return +IDENTIFIER.
+34.N_arithmetic -> N_arithmeticOp N_arithmetic N_arithmetic'.
+35.N_arithmetic' -> N_arithmetic 
+36.N_arithmetic' ->+IDENTIFIER.
+37.N_relational -> N_relationalOp N_arithmetic N_arithmetic.
+38.N_iterative -> while +LBRAC N_relational +RBRAC N_statement 
+39.N_iterative -> for +LBRAC N_arithmetic +SEM N_relational +SEM N_arithmetic +RBRAC N_statement.
+40.N_conditional -> if N_relational +COLON N_statement N_else.
+41.N_else -> else N_relational +COLON N_statement 
+42.N_else ->epsilon
+43.N_functionCall -> +LBRAC N_functionCall'.
+44.N_functionCall' -> N_arglist +RBRAC 
+45.N_functionCall' -> +RBRAC.
+46.N_arglist -> +IDENTIFIER N_arglist'.
+47.N_arglist' -> +COMMA N_arglist 
+48.N_arglist' -> epsilon
+49.N_assignment -> +EQT N_assignment' 
+50.N_assignment -> N_literal.
+51.N_assignment' -> N_arithmetic |
+52.N_assignment' -> N_functionCall.
+53.N_literal -> +intLiteral 
+54.N_literal -> +charLiteral 
+55.N_literal ->+doubleLiteral  
+56.N_literal ->+stringLiteral.
+57.N_arithmeticOp -> +DIV 
+58.N_arithmeticOp -> +MUL 
+59.N_arithmeticOp -> +PLUS 
+60.N_arithmeticOp ->+MINUS
+61.N_arithmeticOp -> +MOD.
+62.N_relationalOp -> +EQQ 
+63.N_relationalOp -> +NEQ
+64.N_relationalOp -> +GE 
+65.N_relationalOp -> +LE
+66.N_relationalOp -> +G
+67.N_relationalOp -> +L.
